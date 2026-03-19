@@ -4,7 +4,7 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that e
 
 ## What it does
 
-The server provides a single tool — `convert_url_to_format` — that converts a publicly accessible URL (HTML page, Markdown, SVG, etc.) to a target document format via the [Aspose.HTML Cloud API](https://products.aspose.cloud/html/).
+Converts documents between formats via the [Aspose.HTML Cloud API](https://products.aspose.cloud/html/).
 
 | Supported input formats | Supported output formats |
 |---|---|
@@ -14,24 +14,12 @@ The server provides a single tool — `convert_url_to_format` — that converts a pu
 
 > "Convert https://example.com to PDF"
 
-The AI will call the `convert_url_to_format` tool and return the converted file.
-
 ## Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
 - A free **Aspose Cloud** account — sign up at [dashboard.aspose.cloud](https://dashboard.aspose.cloud/) and create an application to get your **Client ID** and **Client Secret**
 
-## Quick Start
-
-### Option A — Install as a .NET global tool (recommended)
-
-```bash
-dotnet tool install -g Aspose.HTML.Cloud.Mcp
-```
-
-This installs the `aspose-html-mcp` command globally. No cloning or building required.
-
-### Option B — Build from source
+## Installation
 
 ```bash
 git clone https://github.com/aspose-html-cloud/Aspose.HTML-Cloud-MCP.git
@@ -41,6 +29,8 @@ dotnet build
 
 ## Configuration with MCP Clients
 
+Credentials are passed via environment variables `ASPOSE_CLIENT_ID` and `ASPOSE_CLIENT_SECRET`.
+
 ### Claude Desktop
 
 Edit your Claude Desktop config file:
@@ -48,30 +38,12 @@ Edit your Claude Desktop config file:
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
-**If installed as a global tool:**
-
-```json
-{
-  "mcpServers": {
-    "aspose-html-cloud": {
-      "command": "aspose-html-mcp",
-      "env": {
-        "ASPOSE_CLIENT_ID": "your-client-id",
-        "ASPOSE_CLIENT_SECRET": "your-client-secret"
-      }
-    }
-  }
-}
-```
-
-**If built from source:**
-
 ```json
 {
   "mcpServers": {
     "aspose-html-cloud": {
       "command": "dotnet",
-      "args": ["run", "--project", "/absolute/path/to/Aspose.HTML.Cloud.Mcp"],
+      "args": ["run", "--project", "/absolute/path/to/Aspose.HTML-Cloud-MCP"],
       "env": {
         "ASPOSE_CLIENT_ID": "your-client-id",
         "ASPOSE_CLIENT_SECRET": "your-client-secret"
@@ -85,33 +57,13 @@ Edit your Claude Desktop config file:
 
 Add to your `.vscode/settings.json` or user settings:
 
-**If installed as a global tool:**
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "aspose-html-cloud": {
-        "command": "aspose-html-mcp",
-        "env": {
-          "ASPOSE_CLIENT_ID": "your-client-id",
-          "ASPOSE_CLIENT_SECRET": "your-client-secret"
-        }
-      }
-    }
-  }
-}
-```
-
-**If built from source:**
-
 ```json
 {
   "mcp": {
     "servers": {
       "aspose-html-cloud": {
         "command": "dotnet",
-        "args": ["run", "--project", "/absolute/path/to/Aspose.HTML.Cloud.Mcp"],
+        "args": ["run", "--project", "/absolute/path/to/Aspose.HTML-Cloud-MCP"],
         "env": {
           "ASPOSE_CLIENT_ID": "your-client-id",
           "ASPOSE_CLIENT_SECRET": "your-client-secret"
@@ -126,30 +78,12 @@ Add to your `.vscode/settings.json` or user settings:
 
 Add to your Cursor MCP configuration (`~/.cursor/mcp.json`):
 
-**If installed as a global tool:**
-
-```json
-{
-  "mcpServers": {
-    "aspose-html-cloud": {
-      "command": "aspose-html-mcp",
-      "env": {
-        "ASPOSE_CLIENT_ID": "your-client-id",
-        "ASPOSE_CLIENT_SECRET": "your-client-secret"
-      }
-    }
-  }
-}
-```
-
-**If built from source:**
-
 ```json
 {
   "mcpServers": {
     "aspose-html-cloud": {
       "command": "dotnet",
-      "args": ["run", "--project", "/absolute/path/to/Aspose.HTML.Cloud.Mcp"],
+      "args": ["run", "--project", "/absolute/path/to/Aspose.HTML-Cloud-MCP"],
       "env": {
         "ASPOSE_CLIENT_ID": "your-client-id",
         "ASPOSE_CLIENT_SECRET": "your-client-secret"
@@ -157,37 +91,6 @@ Add to your Cursor MCP configuration (`~/.cursor/mcp.json`):
     }
   }
 }
-```
-
-## Available Tools
-
-### `convert_url_to_format`
-
-Converts a publicly accessible URL to a target document format.
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `sourceUrl` | string | ? | Public URL of the source document |
-| `outputFormat` | string | ? | Target format (`pdf`, `docx`, `png`, etc.) |
-| `inputFormat` | string | ? | Source format (default: `html`) |
-
-**Returns** a JSON object with:
-- `success` — whether the conversion succeeded
-- `message` — human-readable status
-- `fileBase64` — the converted file as a Base64-encoded string
-- `outputFormat` — the output format used
-- `fileSizeBytes` — size of the converted file
-- `sourceUrl` — the original URL
-
-## Publishing to NuGet
-
-To pack and push a new version:
-
-```bash
-dotnet pack Aspose.HTML.Cloud.Mcp -c Release
-dotnet nuget push Aspose.HTML.Cloud.Mcp/bin/Release/Aspose.HTML.Cloud.Mcp.1.0.0.nupkg \
-  --api-key YOUR_NUGET_API_KEY \
-  --source https://api.nuget.org/v3/index.json
 ```
 
 ## License
