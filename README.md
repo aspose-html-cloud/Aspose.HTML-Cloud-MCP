@@ -10,9 +10,22 @@ Converts documents between formats via the [Aspose.HTML Cloud API](https://produ
 |---|---|
 | `html`, `mhtml`, `xhtml`, `epub`, `svg`, `md` | `pdf`, `xps`, `docx`, `doc`, `jpeg`, `png`, `bmp`, `gif`, `tiff`, `webp`, `md`, `mhtml`, `svg` |
 
-**Example prompt in Claude Desktop:**
+**Available tools:**
+
+| Tool | Input source |
+|---|---|
+| `convert_url_to_format` | Public URL |
+| `convert_content_to_format` | Raw HTML / SVG / Markdown string |
+| `convert_base64_to_format` | Base64-encoded document |
+| `convert_file_to_format` | Local file path |
+
+**Example prompts:**
 
 > "Convert https://example.com to PDF"
+
+> "Convert this HTML to DOCX: \<html\>\<body\>\<h1\>Hello\</h1\>\</body\>\</html\>"
+
+> "Convert C:\docs\report.html to PNG"
 
 ## Prerequisites
 
